@@ -16,7 +16,7 @@ body {
   min-height: 100vh;
 }
 
-/* Sidebar Styles */
+
 .sidebar {
   width: 280px;
   background: #ffffff;
@@ -88,7 +88,7 @@ body {
   border-right: 3px solid #3b82f6;
 }
 
-/* Main Content */
+
 .main-content {
   flex: 1;
   margin-left: 280px;
@@ -96,7 +96,7 @@ body {
   flex-direction: column;
 }
 
-/* Header Styles */
+
 .dashboard-header {
   background: white;
   padding: 24px 32px;
@@ -223,7 +223,7 @@ body {
   color: #64748b;
 }
 
-/* Page Content Styles */
+
 .page-content {
   padding: 32px;
   flex: 1;
@@ -285,7 +285,7 @@ body {
   color: #3b82f6;
 }
 
-/* Bookings Styles */
+
 .bookings-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -397,7 +397,7 @@ body {
   font-size: 16px;
 }
 
-/* Locations Styles */
+
 .locations-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -544,7 +544,7 @@ body {
   margin-left: 8px;
 }
 
-/* Reports Styles */
+
 .reports-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -688,7 +688,7 @@ body {
   background: #2563eb;
 }
 
-/* Revenue Styles */
+
 .revenue-overview {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -907,7 +907,7 @@ body {
   color: #64748b;
 }
 
-/* Analytics Styles */
+
 .analytics-overview {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1092,13 +1092,12 @@ body {
   color: #10b981;
 }
 
-/* Dashboard Content */
 .dashboard-content {
   padding: 32px;
   flex: 1;
 }
 
-/* Metrics Cards */
+
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1198,14 +1197,14 @@ body {
   font-weight: 500;
 }
 
-/* Dashboard Grid */
+
 .dashboard-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 32px;
 }
 
-/* Activity Card */
+
 .activity-card {
   background: white;
   border-radius: 12px;
@@ -1308,7 +1307,7 @@ body {
   color: #10b981;
 }
 
-/* Quick Stats */
+
 .quick-stats {
   background: white;
   border-radius: 12px;
@@ -1370,7 +1369,6 @@ body {
   color: #64748b;
 }
 
-/* Chart Placeholder */
 .chart-placeholder {
   background: white;
   border-radius: 12px;
@@ -1422,7 +1420,6 @@ body {
   color: #64748b;
 }
 
-/* Responsive Design */
 @media (max-width: 1200px) {
   .sidebar {
     width: 240px;

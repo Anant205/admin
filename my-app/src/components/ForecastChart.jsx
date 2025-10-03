@@ -1,4 +1,4 @@
-// src/components/ForecastChart.jsx
+
 
 import React, { useState, useEffect } from "react";
 import {
@@ -12,21 +12,20 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-// 1. IMPORT the local data and the local forecast function (from reportsData.js)
+
 import { dailyTripsData, generateLocalForecast } from '../data/reportsData'; 
 
 const ForecastChart = () => {
     const [chartData, setChartData] = useState([]);
     const [loading, setLoading] = useState(true);
-    // NEW State to track the current view: 'daily' or 'forecast'
     const [viewMode, setViewMode] = useState('daily'); 
 
-    // Function to generate the forecast locally
+   
     const generateForecast = () => {
         setTimeout(() => {
             const forecastData = generateLocalForecast(dailyTripsData, 7);
             
-            // Create the full merged dataset once
+            
             const mergedData = [
                 ...dailyTripsData.map(d => ({ ...d, isForecast: false, totalTrips: d.totalTrips })),
                 ...forecastData.map(d => ({ 
@@ -38,19 +37,16 @@ const ForecastChart = () => {
 
             setChartData(mergedData);
             setLoading(false);
-        }, 500); // 0.5 second delay
+        }, 500); 
     };
 
     useEffect(() => {
         generateForecast();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        
     }, []);
 
-    // --- Data Preparation based on View Mode ---
-
-    // Filter data based on viewMode
     const dataForCurrentView = chartData.filter(d => 
-        viewMode === 'daily' ? !d.isForecast : true // 'daily' mode excludes forecast points
+        viewMode === 'daily' ? !d.isForecast : true 
     );
 
     const chartTitle = viewMode === 'daily' ? "Daily Historical Trips" : "7-Day Local Forecast";
@@ -70,11 +66,9 @@ const ForecastChart = () => {
     
     return (
         <div className="p-4 bg-white shadow-lg rounded-xl">
-            {/* BUTTONS and Title Container */}
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold text-gray-800">{chartTitle}</h2>
                 <div className="flex space-x-2 p-1 bg-gray-100 rounded-lg">
-                    {/* Button 1: Daily Trips (Historical) */}
                     <button
                         onClick={() => setViewMode('daily')}
                         className={`px-3 py-1 text-sm font-medium rounded-md transition-colors duration-150 ${
@@ -83,7 +77,6 @@ const ForecastChart = () => {
                     >
                         Daily Trips
                     </button>
-                    {/* Button 2: Forecast (Combined Trend) */}
                     <button
                         onClick={() => setViewMode('forecast')}
                         className={`px-3 py-1 text-sm font-medium rounded-md transition-colors duration-150 ${
@@ -105,15 +98,15 @@ const ForecastChart = () => {
                     
                     <Line
                         type="monotone"
-                        dataKey="totalTrips" // Always use totalTrips for data binding
-                        stroke={viewMode === 'daily' ? "#3b82f6" : "#10b981"} // Change color based on view
+                        dataKey="totalTrips" 
+                        stroke={viewMode === 'daily' ? "#3b82f6" : "#10b981"} 
                         strokeWidth={2}
-                        dot={viewMode === 'daily' ? { r: 3 } : false} // Only show dots in Daily view
+                        dot={viewMode === 'daily' ? { r: 3 } : false} 
                         activeDot={{ r: 8 }}
                         name={viewMode === 'daily' ? "Total Trips" : "Combined Trend"}
                         isAnimationActive={false} 
                         
-                        // Apply dash array only in 'forecast' mode, and only to the prediction section
+                        
                         strokeDasharray={
                             viewMode === 'forecast' 
                                 ? (index) => (index >= forecastStartIndex ? "5 5" : "0 0") 

@@ -1,6 +1,6 @@
-// src/context/AuthContext.jsx
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 
 const AuthContext = createContext(null);
 
@@ -11,15 +11,12 @@ export const AuthProvider = ({ children }) => {
   const [showLoginModal, setShowLoginModal] = useState(false); 
 
   useEffect(() => {
-    // --- CRITICAL CHANGE: Force logout on load ---
-    // If a token exists from a previous session, discard it to force re-login.
     localStorage.removeItem('authToken'); 
     
-    // Set a timeout to simulate loading, ensuring the modal doesn't flash immediately
     const timer = setTimeout(() => {
         setIsAuthenticated(false);
         setUser(null);
-        setShowLoginModal(true); // Always show modal
+        setShowLoginModal(true);
         setIsLoading(false);
     }, 500); 
 
@@ -27,9 +24,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (credentials) => {
-    // === DUMMY LOGIN LOGIC ===
     if (credentials.username === 'admin' && credentials.password === 'password') {
-      // We still set the token, but it will be instantly cleared on the next reload
       localStorage.setItem('authToken', 'dummy_admin_token'); 
       setIsAuthenticated(true);
       setUser({ username: credentials.username });
@@ -48,8 +43,10 @@ export const AuthProvider = ({ children }) => {
     setShowLoginModal(true); 
   };
 
+  const authContextValue = useMemo(() => ({ user, isAuthenticated, isLoading, login, logout, showLoginModal, setShowLoginModal }), [user, isAuthenticated, isLoading, showLoginModal]);
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, isLoading, login, logout, showLoginModal, setShowLoginModal }}>
+    <AuthContext.Provider value={authContextValue}>
       {children}
     </AuthContext.Provider>
   );

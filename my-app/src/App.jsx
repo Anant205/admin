@@ -1,4 +1,4 @@
-// src/App.jsx
+
 
 import React, { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ import Revenue from './pages/Revenue';
 import Analytics from './pages/Analytics';
 import './App.css';
 
-// AUTH IMPORTS
+
 import { useAuth } from './context/AuthContext';
 import LoginModal from './components/LoginModal';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -20,7 +20,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   
-  const { isAuthenticated, isLoading } = useAuth(); // Now relies solely on isAuthenticated
+  const { isAuthenticated, isLoading } = useAuth(); 
 
   const handleSearch = (term) => {
     setSearchTerm(term);

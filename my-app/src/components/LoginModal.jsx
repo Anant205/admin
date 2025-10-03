@@ -1,10 +1,9 @@
-// src/components/LoginModal.jsx
+
 
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 const LoginModal = () => {
-  // Assuming 'username' is what your current AuthContext uses for the input field
   const [username, setUsername] = useState(''); 
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -29,11 +28,9 @@ const LoginModal = () => {
   }
 
   return (
-    // Centering the modal over the entire screen
     <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex items-center justify-center z-50">
       <div className="bg-white p-8 rounded-lg shadow-xl w-96 max-w-sm">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Admin Login</h2>
-        
         <form onSubmit={handleSubmit}>
           
           <div className="mb-4">
@@ -49,7 +46,6 @@ const LoginModal = () => {
               required
             />
           </div>
-          
           <div className="mb-6">
             <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
               Password:
@@ -63,7 +59,6 @@ const LoginModal = () => {
               required
             />
           </div>
-          
           {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
           
           <div className="flex items-center justify-between">

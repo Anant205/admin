@@ -11,26 +11,21 @@ export const dailyTripsData = [
 export const generateLocalForecast = (data, days = 7) => {
     if (!data || data.length < 2) return [];
     
-    // Simple logic: Base the forecast on the last data point's value
     const lastValue = data[data.length - 1].totalTrips;
-    
-    // Get the date of the last historical data point
     const lastDate = new Date(data[data.length - 1].date);
     
     const forecast = [];
     for (let i = 1; i <= days; i++) {
         const nextDate = new Date(lastDate);
         nextDate.setDate(lastDate.getDate() + i);
-        
-        // Apply a simple variation for forecasting
         const predictedValue = Math.round(
             lastValue + (i * 1.5) + Math.sin(i) * 5
         );
         
         forecast.push({
             date: nextDate.toISOString().slice(0, 10),
-            totalTrips: Math.max(10, predictedValue), // Ensure trips don't go below 10
-            isForecast: true
+            totalTrips: Math.max(10, predictedValue), 
+            isForecast: true,
         });
     }
     return forecast;
@@ -38,8 +33,7 @@ export const generateLocalForecast = (data, days = 7) => {
 
 export const generateDailyTripsCSV = (data) => {
     let csv = "Date,TotalTrips\n";
-    data.forEach(d => {
-        // Exclude forecast data from the CSV export by checking 'isForecast' property
+    data.forEach((d) => {
         if (!d.isForecast) {
             csv += `${d.date},${d.totalTrips}\n`;
         }
@@ -50,7 +44,7 @@ export const generateDailyTripsCSV = (data) => {
 export const downloadCSV = (csvContent, filename) => {
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
-    
+
     if (link.download !== undefined) { 
         const url = URL.createObjectURL(blob);
         link.setAttribute('href', url);
@@ -61,7 +55,6 @@ export const downloadCSV = (csvContent, filename) => {
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
     } else {
-        // Fallback for older browsers
         alert("Download feature not supported by your browser.");
     }
 };

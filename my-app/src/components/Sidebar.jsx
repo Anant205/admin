@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Hop as Home, Car, DollarSign, ChartBar as BarChart3, FileText, Calendar, MapPin } from 'lucide-react';
 
